@@ -1,13 +1,25 @@
 PandasTA
 ========
 
-This is a small script to do technique analysis on stock data from Yahoo Finance.
+This is a script to do technique analysis on stock data from Yahoo Finance.
 
 It use python-pandas to read historical stock data, 
 and then use TA-lib to calculate several essential technique analysis indicators.
 
 The input is simple list of ticker names.
 The output is pandas' panel data structure which contains all relevant information.
+
+## TA inductors
+1. SMA - simple moving average
+2. BB_upper, BB_center, BB_lower - bollinger bands 
+3. BB_per, BB_width - bollinger bands percentage and width
+4. CCI - Commodity Channel Index
+5. MACD, MACD_signal, MACD_hist - Moving Average Convergence/Divergence
+6. MFI - Money Flow Index
+7. MOM - Momentum
+8. RSI - Relative Strength Index
+9. Will - Williams' %R
+10. DCPeriod, DCPhase - Hilbert Transform - Dominant Cycle Period and Phase
 
 # requirements
 1. pandas
@@ -19,7 +31,7 @@ The output is pandas' panel data structure which contains all relevant informati
 	print panel
 	print panel.minor_xs('AAPL')[['Close', 'BB_per', "MACD_Hist"]].tail()
 
-	
+
 	<class 'pandas.core.panel.Panel'>
 	Dimensions: 22 (items) x 126 (major_axis) x 4 (minor_axis)
 	Items axis: Open to DCPhase

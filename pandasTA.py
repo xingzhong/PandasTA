@@ -60,8 +60,8 @@ def load(tickers, start=datetime.now()-timedelta(days=180),
 	panel['BB_width'] = (panel.BB_upper - panel.BB_lower) / panel.BB_center
 	panel['CCI'] = CCIDf
 	panel['MACD'] = MACDDf
-	panel['MACD_Signal'] = MACDSDf
-	panel['MACD_Hist']= MACDHDf
+	panel['MACD_signal'] = MACDSDf
+	panel['MACD_hist']= MACDHDf
 	panel['MFI'] = MFIDf
 	panel['MOM'] = MOMDf
 	panel['RSI'] = RSIDf
@@ -74,4 +74,4 @@ if __name__ == '__main__':
 	tickers = ['AAPL', "AMZN", "SOHU", "WMT"]
 	panel = load(tickers)
 	print panel
-	print panel.minor_xs('AAPL')[['Close', 'BB_per', "MACD_Hist"]].tail()
+	print panel.minor_xs('AAPL')[['Close', 'BB_per', "MACD_hist"]].tail()
