@@ -3,7 +3,7 @@ from pandas.io.data import DataReader
 from datetime import datetime, timedelta
 import talib
 
-def load(tickers, start=datetime.now()-timedelta(days=180), 
+def load(tickers, start=datetime.now()-timedelta(days=255), 
 			end=datetime.now()):
 	"""load data from yahoo finance and do technique analysis
 
@@ -39,16 +39,16 @@ def load(tickers, start=datetime.now()-timedelta(days=180),
 	HilbertPhaseDf = pd.DataFrame(index=panel.major_axis)
 
 	for (t, df) in panelCopy.iteritems():
-	    smaDf[t] = talib.SMA(df.Close)
-	    BBUDf[t], BBMDf[t], BBDDf[t] = talib.BBANDS(df.Close)
-	    CCIDf[t] = talib.CCI(df.High, df.Low, df.Close)
-	    MACDDf[t], MACDSDf[t], MACDHDf[t] = talib.MACD(df.Close)
-	    MFIDf[t] = talib.MFI(df.High, df.Low, df.Close, df.Volume)
-	    MOMDf[t] = talib.MOM(df.Close)
-	    RSIDf[t] = talib.RSI(df.Close)
-	    WillDf[t] = talib.WILLR(df.High, df.Low, df.Close)
-	    HilbertPeriodDf[t] = talib.HT_DCPERIOD(df.Close)
-	    HilbertPhaseDf[t] = talib.HT_DCPHASE(df.Close)
+	    smaDf[t] = talib.SMA(df.Close.values)
+	    BBUDf[t], BBMDf[t], BBDDf[t] = talib.BBANDS(df.Close.values)
+	    CCIDf[t] = talib.CCI(df.High.values, df.Low.values, df.Close.values)
+	    MACDDf[t], MACDSDf[t], MACDHDf[t] = talib.MACD(df.Close.values)
+	    MFIDf[t] = talib.MFI(df.High.values, df.Low.values, df.Close.values, df.Volume.values)
+	    MOMDf[t] = talib.MOM(df.Close.values)
+	    RSIDf[t] = talib.RSI(df.Close.values)
+	    WillDf[t] = talib.WILLR(df.High.values, df.Low.values, df.Close.values)
+	    HilbertPeriodDf[t] = talib.HT_DCPERIOD(df.Close.values)
+	    HilbertPhaseDf[t] = talib.HT_DCPHASE(df.Close.values)
 	    
 	    
 	panel['SMA'] = smaDf
@@ -68,10 +68,10 @@ def load(tickers, start=datetime.now()-timedelta(days=180),
 	panel['Will'] = WillDf
 	panel['DCPeriod'] = HilbertPeriodDf
 	panel['DCPhase'] = HilbertPhaseDf
-	return panel
+	return panel.transpose(2, 1, 0)
 
 if __name__ == '__main__':
 	tickers = ['AAPL', "AMZN", "SOHU", "WMT"]
 	panel = load(tickers)
 	print panel
-	print panel.minor_xs('AAPL')[['Close', 'BB_per', "MACD_hist"]].tail()
+	#print panel.minor_xs('AAPL')[['Close', 'BB_per', "MACD_hist"]].tail()

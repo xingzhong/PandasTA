@@ -1,10 +1,10 @@
 PandasTA
 ========
 
-This is a script to do technique analysis on stock data from Yahoo Finance.
+This is a script to do technical analysis on stock data from Yahoo Finance.
 
 It use python-pandas to read historical stock data, 
-and then use TA-lib to calculate several essential technique analysis indicators.
+and then use TA-lib to calculate several essential technical analysis indicators.
 
 The input is simple list of ticker names.
 The output is pandas' panel data structure which contains all relevant information.
